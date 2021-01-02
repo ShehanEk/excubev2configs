@@ -1,0 +1,5 @@
+initialData:
+  - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
+    alias: 'returnTargetFormData'
+  - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
+    alias: 'returnTargetFormData'  

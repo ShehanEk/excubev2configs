@@ -1,0 +1,10 @@
+stepAction:
+    - code: N-R-11
+      data:
+        - key: PROPOSAL_NAME
+          path: 'dataset.formData.assets.proposalName'
+stepAction:
+    - code: N-R-11
+      data:
+        - key: PROPOSAL_NAME
+          path: 'dataset.formData.assets.proposalName'          

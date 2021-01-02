@@ -1,0 +1,11 @@
+stepAction:
+  - auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+    data:
+      - key: PROPOSAL_NAME
+        path: 'dataset.formData.assets.proposalName'
+stepAction:
+  - auditTrailAction: ATA_SAVE_INITIAL_PROPOSAL
+    data:
+      - key: PROPOSAL_NAME
+        path: 'dataset.formData.assets.proposalName'
+
