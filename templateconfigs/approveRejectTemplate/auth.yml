@@ -1,3 +1,4 @@
+# allowed user types 
 approvalType:
     - LGIM
     - CLIENT
@@ -5,5 +6,5 @@ approvalType:
     - SELECTED
 approveCount : 3
 rejectCount: ALL
-approveClaim: CLM-11
-assignToClaim: CLM-11
+# user selection criteria. based on a claim or user type 
+claimOrUserTypeBased: CLAIM

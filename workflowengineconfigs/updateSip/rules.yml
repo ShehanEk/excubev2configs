@@ -1,0 +1,18 @@
+updSip:
+  enable:
+    - !reqCancelIaaFma
+    - !updAvcDetl
+  disable:
+    - reqCancelIaaFma
+    - updAvcDetl
+  steps:
+    genrSip:
+      enable:
+        - true
+      disable:
+        - false
+    aprvSip:
+    publSip:
+    schAprvSip:
+    spnsrConsltLtr:
+    actMendt:      
