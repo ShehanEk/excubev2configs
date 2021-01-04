@@ -1,5 +1,6 @@
 workflow:
   title: 'Review Statement of Investment Principles'
+  alias: rsoip
   sort: 1
   client: true
   lgim: true
@@ -25,7 +26,7 @@ workflow:
               - key: PROPOSAL_NAME
                 path: 'dataset.formData.assets.proposalName'
       assigneeClaim: CLM-12           
-    formDataStep2:
+    approveRejectStep2:
       title: 'Review Statement of Investment Principles'
       authConfig:
         approvalType: LGIM

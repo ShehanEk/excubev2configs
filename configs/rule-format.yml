@@ -2,7 +2,7 @@ shehan
   enable:
     - NOT isSpecialAdvisory AND publishIaa
     - OR isSpecialAdvisory
-    - AND publishFma AND publishPmc && publishSip
+    - AND publishFma AND publishPmc AND publishSip
 
 Charith
   enable: reqIaa:ENABLED AND schemeName:enabled OR appFma:DISABLE

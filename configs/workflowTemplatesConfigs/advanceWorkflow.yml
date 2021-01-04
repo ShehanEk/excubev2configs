@@ -1,0 +1,63 @@
+workflow:
+  title: 'Review Statement of Investment Principles'
+  alias: rsoip
+  sort: 1
+  enabled: true
+  roles:
+    - client
+    - lgim
+    - advisory
+    - specialAdvisory
+    - X
+  steps:
+    formDataStep1:
+      roles:
+        - client
+        - lgim
+      title: 'Input return target'
+      initialDataConfig:
+        - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
+          from: scheme | workflowData
+          alias: 'returnTargetFormData'
+        - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
+          from: scheme | workflowData
+          alias: 'returnTargetFormData'
+      stepActions:    
+        STEP_ACTION_UPDATE_WORKFLOW:
+          stepFunction: 'adhocDocGen'
+          notificationConfig:
+            notificationCode: N-R-11
+              data:
+                - key: PROPOSAL_NAME
+                  path: 'dataset.formData.assets.proposalName'
+          auditTrail:
+            auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+              data:
+                - key: PROPOSAL_NAME
+                  path: 'dataset.formData.assets.proposalName'          
+      assigneeClaim: CLM-12
+      globalVariables:
+        - iaaUpload 
+        - pmcUpload             
+    approveRejectStep2:
+      title: 'Review Statement of Investment Principles'
+      roles:
+        - lgim      
+      authConfig:
+        approvalType: LGIM
+        approveCount: 3
+        rejectCount: ALL
+        authClaim: CLM-11
+      stepActions:  
+        STEP_ACTION_AUTHORIZE:
+          notificationConfig:
+            notificationCode: N-R-11
+              data:
+                - key: PROPOSAL_NAME
+                  path: 'dataset.formData.assets.proposalName'
+          auditTrail:
+            auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+              data:
+                - key: PROPOSAL_NAME
+                  path: 'dataset.formData.assets.proposalName'       
+      assigneeClaim: CLM-12   

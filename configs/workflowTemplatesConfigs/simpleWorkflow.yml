@@ -1,0 +1,29 @@
+workflow:
+  title: 'Review Statement of Investment Principles'
+  alias: rsoip
+  sort: 1
+  enabled: true
+  roles:
+    - client
+    - lgim
+    - advisory
+    - specialAdvisory
+  steps:
+    formDataStep1:
+      roles:
+        - client
+        - lgim
+      title: 'Review Statement of Investment Principles'
+      assigneeClaim: CLM-12           
+    approveRejectStep2:
+      title: 'Review Statement of Investment Principles'
+      roles:
+        - lgim      
+      authConfig:
+        approvalType: LGIM
+        approveCount: 3
+        rejectCount: ALL
+        authClaim: CLM-11      
+      assigneeClaim: CLM-12   
+
+
