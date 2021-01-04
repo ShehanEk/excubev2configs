@@ -6,3 +6,7 @@ shehan
 
 Charith
   enable: reqIaa:ENABLED AND schemeName:enabled OR appFma:DISABLE
+
+Gayashan
+  enable:
+    - ((NOT isSpecialAdvisory AND publishIaa) OR isSpecialAdvisory) AND ( publishFma AND publishPmc AND publishSip) #WANT TO IDENTIFY ()
