@@ -1,8 +1,0 @@
-next:
-  cp:
-    - section: formData
-      from: reqip
-      to: dowip
-    - section: approvers
-      from: reqip
-      to: dowip

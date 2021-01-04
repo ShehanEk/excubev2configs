@@ -1,0 +1,42 @@
+workflow:
+  title: 'Review Statement of Investment Principles'
+  sort: 1
+  client: true
+  lgim: true
+  advisory: true
+  specialAdvisory: true
+  steps:
+    formDataStep1:
+      title: 'Review Statement of Investment Principles'
+      initialDataConfig:
+        - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
+          alias: 'returnTargetFormData'
+        - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
+          alias: 'returnTargetFormData' 
+      STEP_ACTION_UPDATE_WORKFLOW:
+        notificationConfig:
+          notificationCode: N-R-11
+            data:
+              - key: PROPOSAL_NAME
+                path: 'dataset.formData.assets.proposalName'
+        auditTrail:
+          auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+            data:
+              - key: PROPOSAL_NAME
+                path: 'dataset.formData.assets.proposalName'
+      assigneeClaim: CLM-12           
+    formDataStep2:
+      title: 'Review Statement of Investment Principles'
+      authConfig:
+        approvalType: LGIM
+        approveCount: 3
+        rejectCount: ALL
+        approveClaim: CLM-11      
+      STEP_ACTION_PROCEED_WORKFLOW:
+        notificationConfig:
+          notificationCode: N-R-11
+        auditTrail:
+          auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+      assigneeClaim: CLM-12   
+
+
