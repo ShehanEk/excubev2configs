@@ -1,9 +1,0 @@
-approvalType:
-    - LGIM
-    - CLIENT
-    - TRUSTEE
-    - SELECTED
-approveCount : 3
-rejectCount: ALL
-approveClaim: CLM-11
-assignToClaim: CLM-11
