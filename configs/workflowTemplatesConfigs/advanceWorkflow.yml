@@ -15,13 +15,23 @@ workflow:
         - client
         - lgim
       title: 'Input return target'
+      showRejectedData: true 
       initialDataConfig:
-        - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
-          from: scheme | workflowData
-          alias: 'returnTargetFormData'
-        - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
-          from: scheme | workflowData
-          alias: 'returnTargetFormData'
+        - key: 'assetValue'
+          from: scheme
+          alias: 'assetValue2'
+        - key: 'fundValue'
+          from: scheme
+          alias: 'fundValue1'          
+        - from: workflowData
+          workflow: key
+          stepKey: key
+          alias: 'returnTargetFormData2'
+      # save step data to scheme dataset
+      # if only mandate: true provided , step data will be fatten and saved to scheme
+      mandate: true
+        - from: 'tab.valueAbc'
+          to: 'valueAbc'             
       stepActions:    
         STEP_ACTION_UPDATE_WORKFLOW:
           stepFunction: 'adhocDocGen'
@@ -34,11 +44,13 @@ workflow:
             auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
               data:
                 - key: PROPOSAL_NAME
-                  path: 'dataset.formData.assets.proposalName'          
-      assigneeClaim: CLM-12
+                  path: 'dataset.formData.assets.proposalName'
+      claimConfig:                      
+        - assigneeClaim: CLM-12
       globalVariables:
-        - iaaUpload 
-        - pmcUpload             
+        - key: proposalName
+          globalVariableAlias: propName
+          value: 'ABC'        
     approveRejectStep2:
       title: 'Review Statement of Investment Principles'
       roles:
@@ -47,7 +59,6 @@ workflow:
         approvalType: LGIM
         approveCount: 3
         rejectCount: ALL
-        authClaim: CLM-11
       stepActions:  
         STEP_ACTION_AUTHORIZE:
           notificationConfig:
@@ -59,5 +70,19 @@ workflow:
             auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
               data:
                 - key: PROPOSAL_NAME
-                  path: 'dataset.formData.assets.proposalName'       
+                  path: 'dataset.formData.assets.proposalName'
+      claimConfig:                      
+        - assigneeClaim: CLM-12
+        - authClaim: CLM-11                 
+    formDataStep1:
+      roles:
+        - client
+        - lgim
+      title: 'Input return target'
+      showRejectedData: true        
+    mandatestepkey:
+      title: 'Review Statement of Investment Principles'
+      roles:
+        - lgim
+      mandateStep: true        
       assigneeClaim: CLM-12   

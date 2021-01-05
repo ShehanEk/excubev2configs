@@ -1,0 +1,17 @@
+# any value that is used as a rule engine param will be stored in globle varible registry 
+# stored value is a boolean
+
+# Document status will be automatically saved to OVR using upload,publish and sign template service
+# upload doc value key IAA_UPLOADED 
+# published doc value key IAA_PUBLISHED
+# sign doc value key IAA_SIGNED
+
+# any globle varible in a form will be handled by a config located in the workflow config
+# alias is optional 
+# value config will be used to evaluate the varible boolean status
+
+  globalVariables:
+    - key: proposalName
+      value: 'ABC'
+      alias: propName
+          

@@ -1,0 +1,57 @@
+{
+
+    "assetval1":1243
+    "funding":{
+        "val":375
+    }
+
+
+
+
+
+
+
+    // "workflow1":{
+    //     "step1UUID":{"assetVal":123}
+    //     "step2UUID":{}
+    //     "step3UUID":{}
+    //     "step4UUID":{}
+    // },
+    // "workflow2":{
+    //     "step1UUID":{"assetVal":458}
+    //     "step2UUID":{}
+    // }
+}
+
+wf1/step4
+{
+    "valueAbc":1234
+
+}
+
+
+wf2/step6
+{
+    "tab":{"valueAbc":1234}
+
+}
+
+
+{
+    "formDataStep2":{
+        
+        "assetval1":1243
+    },
+    "formDataStep1":{
+
+        "assetval1":1243
+        "tab1": {
+            "funding":{
+            "val":375
+            }
+        }
+
+
+
+    }
+}
