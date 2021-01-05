@@ -9,6 +9,15 @@ let formTemp = (props) => {
   const { handleSubmit, onChangedValue, isFieldDisabled } = props;
   const formFields = formSectionJSON({ ...props });
 
-  return <FormBaseTemplate data={formFields} disabled={isFieldDisabled} />;
+  return (
+    <FormBaseTemplate
+      data={formFields}
+      disabled={isFieldDisabled}
+      customHooks={{
+        executionAction: "SA_DC",
+        hook: (e) => {},
+      }}
+    />
+  );
 };
 export default formTemp;
