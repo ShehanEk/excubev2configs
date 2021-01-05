@@ -1,0 +1,24 @@
+{
+    "formField": [
+        {
+            "type": "FULL_CONTAINER",
+            "label": "Do you want us to model deficit contributions?",
+            "field": {
+                "__order": "a",
+                "name": "wantUsToModelDC",
+                "className": "form-control",
+                "component": "BUTTON_GROUP"
+            }
+        },
+        {
+            "type": "FULL_CONTAINER",
+            "label": "sample",
+            "field": {
+                "__order": "b",
+                "name": "name",
+                "className": "form-control",
+                "component": "INPUT_FIELD"
+            }
+        }
+    ]
+}
