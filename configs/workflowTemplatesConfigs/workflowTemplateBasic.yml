@@ -1,15 +1,12 @@
-workflowKey:
+updateAVC:
   title: 'Workflow Title'
-  sort: 1
-  enabled: true
-  roles:
+  # 
+  workflowEnabledFor:
     - CLIENT
-    - LGIM
-    - ADVISORY
-    - SPECIAL_ADVISORY
+    - LGIM  
   steps:
     step1: # form step & also the initial step of the workflow
-      roles:
+      stepEnabledFor:
         - CLIENT
         - LGIM
       title: 'Step1 Title'
@@ -18,7 +15,7 @@ workflowKey:
       preserve: true           
     step2: # Approve Reject step
       title: 'Step2 Title'
-      roles:
+      stepEnabledFor:
         - LGIM
       authConfig:
         approvalType:
@@ -30,8 +27,7 @@ workflowKey:
         assigneeClaim: CLM-3 
     step3: # Mandate step
       title: 'Step3 Title'    
-      roles:
-        - CLIENT
+      stepEnabledFor:
         - LGIM
       title: 'Step4 Title'
       claimConfig:

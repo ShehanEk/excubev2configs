@@ -29,7 +29,7 @@ workflow:
           alias: 'returnTargetFormData2'
       # save step data to scheme dataset
       # if only mandate: true provided , step data will be fatten and saved to scheme
-      mandate: true
+      preserve: true
         - from: 'tab.valueAbc'
           to: 'valueAbc'             
       stepActions:    
@@ -49,7 +49,7 @@ workflow:
         - assigneeClaim: CLM-12
       globalVariables:
         - key: proposalName
-          globalVariableAlias: propName
+          alias: propName
           value: 'ABC'        
     approveRejectStep2:
       title: 'Review Statement of Investment Principles'

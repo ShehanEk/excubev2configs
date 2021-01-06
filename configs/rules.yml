@@ -1,41 +1,46 @@
 # condition variable can be anything stored in global variable registry
 # if disable is not provided it will be the exact opposite of the enable condition 
 
-updateAVC:
-  enable: '!reqCancelIaaFma && !updSip' 
-  visible: '!funding'
-  steps:
-    avcDetl:
-      enable: 'TRUE'      
-    dwnldAvcDetl:
-      enable: 'avcDetl'  
-    genrDocsAvc:
-      enable: 'avcDetl && dwnldAvcDetl'   
-    aprvSip:
-      enable: 'uploadSip'     
-    avpublDocsAvccDetl:
-      enable: 'aprvSip'    
-    schAprvSip:
-      enable: 'publishedSip'    
-    sponsrConsltLtr:
-      enable: 'publDocsAvc && schAprvSip' 
-      disable: '!publDocsAvc && !schAprvSip'     
-    actMendt:
-      enable: 'schAprvSip && sponsrConsltLtr'                                     
-updateSIP:
-  enable: '!reqCancelIaaFma && !updAvcDetl' 
-  steps:
-    genrSip:
-      enable: 'genrTrnsReprt' 
-    aprvSip:
-      enable: 'uploadSip'     
-    publSip:
-      enable: 'aprvSip'     
-    schAprvSip:
-      enable: 'publishedSip'     
-    spnsrConsltLtr:
-      enable: 'publishedSip'     
-    actMendt:   
-      enable: 'schAprvSip && spnsrConsltLtr' 
+workflowConfig:
+  updateAVC:
+    enable: '!reqCancelIaaFma && !updSip' 
+    visible: '!funding'
+    steps:
+      avcDetl:
+        enable: 'TRUE'      
+      dwnldAvcDetl:
+        enable: 'avcDetl'  
+      genrDocsAvc:
+        enable: 'avcDetl && dwnldAvcDetl'   
+      aprvSip:
+        enable: 'uploadSip'     
+      avpublDocsAvccDetl:
+        enable: 'aprvSip'    
+      schAprvSip:
+        enable: 'publishedSip'    
+      sponsrConsltLtr:
+        enable: 'publDocsAvc && schAprvSip' 
+        disable: '!publDocsAvc && !schAprvSip'     
+      actMendt:
+        enable: 'schAprvSip && sponsrConsltLtr'                                     
+  updateSIP:
+    enable: '!reqCancelIaaFma && !updAvcDetl' 
+    steps:
+      genrSip:
+        enable: 'genrTrnsReprt' 
+      aprvSip:
+        enable: 'uploadSip'     
+      publSip:
+        enable: 'aprvSip'     
+      schAprvSip:
+        enable: 'publishedSip'     
+      spnsrConsltLtr:
+        enable: 'publishedSip'     
+      actMendt:   
+        enable: 'schAprvSip && spnsrConsltLtr' 
   
-
+# check if below data available in scheme  
+requiredValues:
+  - var1.abcd 
+  - var2.abcd 
+  - var3.abcd 

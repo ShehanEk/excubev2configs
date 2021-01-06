@@ -17,23 +17,25 @@ workflowKey:
         assigneeClaim: CLM-1
       initialDataConfig: # Where initial data of the workflow coming from. Can refer scheme data or can refer workflow data 
         - key: 'assetValue'
-          from: scheme
-          alias: 'assetValue2'
+          source: scheme
+          alias: 'assetValueAlias'
         - key: 'fundValue'
-          from: scheme
-          alias: 'fundValue1'          
-        - from: workflowData
-          workflow: key
-          stepKey: key
-          alias: 'returnTargetFormData2'                   
+          source: scheme
+          alias: 'fundValueAlias'          
+        - source: workflow
+          workflow: workflowKey
+          stepKey: stepKey
+          alias: 'returnTargetData'                   
       stepActions:    
         - STEP_ACTION_UPDATE_WORKFLOW:
-            stepFunction: 'adhocDocGen'
+            stepFunction: 'stepFunctionName'
             notificationConfig:
               notificationCode: N-R-11
             auditTrail:
               auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
-      preserve: true                             
+      preserve: true
+        - from: 'tab.valueAbc'
+          to: 'valueAbc'                                   
     step2: # Approve Reject step
       title: 'Step2 Title'
       roles:
