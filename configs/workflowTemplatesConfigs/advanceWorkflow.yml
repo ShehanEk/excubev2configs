@@ -1,22 +1,21 @@
-workflow:
-  title: 'Review Statement of Investment Principles'
-  alias: rsoip
+workflowKey:
+  title: 'Workflow Title'
   sort: 1
   enabled: true
   roles:
-    - client
-    - lgim
-    - advisory
-    - specialAdvisory
-    - X
+    - CLIENT
+    - LGIM
+    - ADVISORY
+    - SPECIAL_ADVISORY
   steps:
-    formDataStep1:
+    step1: # form step & also the initial step of the workflow
       roles:
-        - client
-        - lgim
-      title: 'Input return target'
-      showRejectedData: true 
-      initialDataConfig:
+        - CLIENT
+        - LGIM
+      title: 'Step1 Title'
+      claimConfig:
+        assigneeClaim: CLM-1
+      initialDataConfig: # Where initial data of the workflow coming from. Can refer scheme data or can refer workflow data 
         - key: 'assetValue'
           from: scheme
           alias: 'assetValue2'
@@ -26,63 +25,44 @@ workflow:
         - from: workflowData
           workflow: key
           stepKey: key
-          alias: 'returnTargetFormData2'
-      # save step data to scheme dataset
-      # if only mandate: true provided , step data will be fatten and saved to scheme
-      mandate: true
-        - from: 'tab.valueAbc'
-          to: 'valueAbc'             
+          alias: 'returnTargetFormData2'                   
       stepActions:    
-        STEP_ACTION_UPDATE_WORKFLOW:
-          stepFunction: 'adhocDocGen'
-          notificationConfig:
-            notificationCode: N-R-11
-              data:
-                - key: PROPOSAL_NAME
-                  path: 'dataset.formData.assets.proposalName'
-          auditTrail:
-            auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
-              data:
-                - key: PROPOSAL_NAME
-                  path: 'dataset.formData.assets.proposalName'
-      claimConfig:                      
-        - assigneeClaim: CLM-12
-      globalVariables:
-        - key: proposalName
-          globalVariableAlias: propName
-          value: 'ABC'        
-    approveRejectStep2:
-      title: 'Review Statement of Investment Principles'
+        - STEP_ACTION_UPDATE_WORKFLOW:
+            stepFunction: 'adhocDocGen'
+            notificationConfig:
+              notificationCode: N-R-11
+            auditTrail:
+              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+      preserve: true                             
+    step2: # Approve Reject step
+      title: 'Step2 Title'
       roles:
-        - lgim      
+        - LGIM
       authConfig:
-        approvalType: LGIM
-        approveCount: 3
-        rejectCount: ALL
+        approvalType:
+          - LGIM
+        approveCount: ALL
+        rejectCount: ALL                       
+      claimConfig:
+        authClaim: CLM-2 
+        assigneeClaim: CLM-3
       stepActions:  
-        STEP_ACTION_AUTHORIZE:
-          notificationConfig:
-            notificationCode: N-R-11
-              data:
-                - key: PROPOSAL_NAME
-                  path: 'dataset.formData.assets.proposalName'
-          auditTrail:
-            auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
-              data:
-                - key: PROPOSAL_NAME
-                  path: 'dataset.formData.assets.proposalName'
-      claimConfig:                      
-        - assigneeClaim: CLM-12
-        - authClaim: CLM-11                 
-    formDataStep1:
+        - STEP_ACTION_AUTHORIZE:
+            notificationConfig:
+              notificationCode: N-R-11
+            auditTrail:
+              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL         
+    step3: # Mandate step
+      title: 'Step3 Title'    
       roles:
-        - client
-        - lgim
-      title: 'Input return target'
-      showRejectedData: true        
-    mandatestepkey:
-      title: 'Review Statement of Investment Principles'
-      roles:
-        - lgim
-      mandateStep: true        
-      assigneeClaim: CLM-12   
+        - CLIENT
+        - LGIM
+      title: 'Step4 Title'
+      claimConfig:
+        assigneeClaim: CLM-4
+      stepActions:  
+        - STEP_ACTION_PROCEED_WORKFLOW:
+            notificationConfig:
+              notificationCode: N-R-20
+            auditTrail:
+              auditTrailAction: ATA_MANDATE_WORKFLOW         

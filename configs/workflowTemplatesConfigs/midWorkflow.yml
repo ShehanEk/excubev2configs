@@ -1,47 +1,62 @@
-workflow:
-  title: 'Review Statement of Investment Principles'
-  alias: rsoip
+workflowKey:
+  title: 'Workflow Title'
   sort: 1
   enabled: true
   roles:
-    - client
-    - lgim
-    - advisory
-    - specialAdvisory
+    - CLIENT
+    - LGIM
+    - ADVISORY
+    - SPECIAL_ADVISORY
   steps:
-    formDataStep1:
+    step1: # form step & also the initial step of the workflow
       roles:
-        - client
-        - lgim
-      title: 'Input return target'
-      mandate: true
-      initialDataConfig:
-        - projectionPath: 'ActivatedSchemeDataset.amao.formData.investment.assets'
-          from: scheme | workflowData
-          alias: 'returnTargetFormData'
+        - CLIENT
+        - LGIM
+      title: 'Step1 Title'
+      claimConfig:
+        assigneeClaim: CLM-1
+      initialDataConfig: # Where initial data of the workflow coming from. Can refer scheme data or can refer workflow data 
+        - key: 'assetValue'
+          source: scheme
+        - key: 'fundValue'
+          source: scheme                    
       stepActions:    
-        STEP_ACTION_UPDATE_WORKFLOW:
-          notificationConfig:
-            notificationCode: N-R-11
-          auditTrail:
-            auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL    
-      assigneeClaim: CLM-12
-      globalVariables:
-        - iaaUpload 
-        - pmcUpload             
-    approveRejectStep2:
-      title: 'Review Statement of Investment Principles'
+        - STEP_ACTION_UPDATE_WORKFLOW:
+            stepFunction: 'adhocDocGen'
+            notificationConfig:
+              notificationCode: N-R-11
+            auditTrail:
+              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+      preserve: true                             
+    step2: # Approve Reject step
+      title: 'Step2 Title'
       roles:
-        - lgim      
+        - LGIM
       authConfig:
-        approvalType: LGIM
-        approveCount: 3
-        rejectCount: ALL
-        authClaim: CLM-11
+        approvalType:
+          - LGIM
+        approveCount: ALL
+        rejectCount: ALL                       
+      claimConfig:
+        authClaim: CLM-2 
+        assigneeClaim: CLM-3
       stepActions:  
-        STEP_ACTION_AUTHORIZE:
-          notificationConfig:
-            notificationCode: N-R-11
-          auditTrail:
-            auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL      
-      assigneeClaim: CLM-12   
+        - STEP_ACTION_AUTHORIZE:
+            notificationConfig:
+              notificationCode: N-R-11
+            auditTrail:
+              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL         
+    step3: # Mandate step
+      title: 'Step3 Title'    
+      roles:
+        - CLIENT
+        - LGIM
+      title: 'Step4 Title'
+      claimConfig:
+        assigneeClaim: CLM-4
+      stepActions:  
+        - STEP_ACTION_PROCEED_WORKFLOW:
+            notificationConfig:
+              notificationCode: N-R-20
+            auditTrail:
+              auditTrailAction: ATA_MANDATE_WORKFLOW         

@@ -1,29 +1,39 @@
-workflow:
-  title: 'Review Statement of Investment Principles'
-  alias: rsoip
+workflowKey:
+  title: 'Workflow Title'
   sort: 1
   enabled: true
   roles:
-    - client
-    - lgim
-    - advisory
-    - specialAdvisory
+    - CLIENT
+    - LGIM
+    - ADVISORY
+    - SPECIAL_ADVISORY
   steps:
-    formDataStep1:
+    step1: # form step & also the initial step of the workflow
       roles:
-        - client
-        - lgim
-      title: 'Review Statement of Investment Principles'
-      assigneeClaim: CLM-12           
-    approveRejectStep2:
-      title: 'Review Statement of Investment Principles'
+        - CLIENT
+        - LGIM
+      title: 'Step1 Title'
+      claimConfig:
+        assigneeClaim: CLM-1       
+      preserve: true           
+    step2: # Approve Reject step
+      title: 'Step2 Title'
       roles:
-        - lgim      
+        - LGIM
       authConfig:
-        approvalType: LGIM
-        approveCount: 3
-        rejectCount: ALL
-        authClaim: CLM-11      
-      assigneeClaim: CLM-12   
-
+        approvalType:
+          - LGIM
+        approveCount: 2
+        rejectCount: ALL                       
+      claimConfig:
+        authClaim: CLM-2 
+        assigneeClaim: CLM-3 
+    step3: # Mandate step
+      title: 'Step3 Title'    
+      roles:
+        - CLIENT
+        - LGIM
+      title: 'Step4 Title'
+      claimConfig:
+        assigneeClaim: CLM-4
 
