@@ -1,18 +1,21 @@
 workflowKey:
   title: 'Workflow Title'
-  sort: 1
-  enabled: true
-  roles:
+  rules:
+    enable: '!reqCancelIaaFma && !updSip' 
+    visible: '!funding'  
+  workflowEnabledFor:
     - CLIENT
     - LGIM
     - ADVISORY
     - SPECIAL_ADVISORY
   steps:
     step1: # form step & also the initial step of the workflow
-      roles:
+      title: 'Step1 Title'
+      rules:
+        enable: 'TRUE'           
+      workflowEnabledFor:
         - CLIENT
         - LGIM
-      title: 'Step1 Title'
       claimConfig:
         assigneeClaim: CLM-1
       initialDataConfig: # Where initial data of the workflow coming from. Can refer scheme data or can refer workflow data 
@@ -30,7 +33,9 @@ workflowKey:
       preserve: true                             
     step2: # Approve Reject step
       title: 'Step2 Title'
-      roles:
+      rules:
+        enable: 'step1'      
+      workflowEnabledFor:
         - LGIM
       authConfig:
         approvalType:
@@ -47,8 +52,11 @@ workflowKey:
             auditTrail:
               auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL         
     step3: # Mandate step
-      title: 'Step3 Title'    
-      roles:
+      title: 'Step3 Title'
+      rules:
+        enable: 'step1 && step2'  
+        disable: '!step2'            
+      workflowEnabledFor:
         - CLIENT
         - LGIM
       title: 'Step4 Title'

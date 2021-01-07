@@ -1,20 +1,26 @@
 updateAVC:
   title: 'Workflow Title'
-  # 
+  rules:
+    enable: '!reqCancelIaaFma && !updSip' 
+    visible: '!funding'
   workflowEnabledFor:
     - CLIENT
     - LGIM  
   steps:
     step1: # form step & also the initial step of the workflow
+      title: 'Step1 Title'    
+      rules:
+        enable: 'TRUE' 
       stepEnabledFor:
         - CLIENT
         - LGIM
-      title: 'Step1 Title'
       claimConfig:
         assigneeClaim: CLM-1       
       preserve: true           
     step2: # Approve Reject step
       title: 'Step2 Title'
+      rules:
+        enable: 'step1'               
       stepEnabledFor:
         - LGIM
       authConfig:
@@ -26,7 +32,10 @@ updateAVC:
         authClaim: CLM-2 
         assigneeClaim: CLM-3 
     step3: # Mandate step
-      title: 'Step3 Title'    
+      title: 'Step3 Title'
+      rules:
+        enable: 'step1 && step2'  
+        disable: '!step2'           
       stepEnabledFor:
         - LGIM
       title: 'Step4 Title'

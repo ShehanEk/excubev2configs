@@ -1,18 +1,21 @@
 workflowKey:
   title: 'Workflow Title'
-  sort: 1
-  enabled: true
-  roles:
+  rules:
+    enable: '!reqCancelIaaFma && !updSip' 
+    visible: '!funding'  
+  stepEnabledFor:
     - CLIENT
     - LGIM
     - ADVISORY
     - SPECIAL_ADVISORY
   steps:
     step1: # form step & also the initial step of the workflow
-      roles:
+      title: 'Step1 Title'    
+      rules:
+        enable: 'TRUE'      
+      stepEnabledFor:
         - CLIENT
         - LGIM
-      title: 'Step1 Title'
       claimConfig:
         assigneeClaim: CLM-1
       initialDataConfig: # Where initial data of the workflow coming from. Can refer scheme data or can refer workflow data 
@@ -31,15 +34,24 @@ workflowKey:
             stepFunction: 'stepFunctionName'
             notificationConfig:
               notificationCode: N-R-11
+                data:
+                  - key: PROPOSAL_NAME
+                    path: 'dataset.formData.assets.proposalName'              
             auditTrail:
               auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+                data:
+                  - key: PROPOSAL_NAME
+                    path: 'dataset.formData.assets.proposalName'              
       preserve: true
         - from: 'tab.valueAbc'
           to: 'valueAbc'                                   
     step2: # Approve Reject step
       title: 'Step2 Title'
-      roles:
+      rules:
+        enable: 'step1'        
+      stepEnabledFor:
         - LGIM
+      showRejectedData: true        
       authConfig:
         approvalType:
           - LGIM
@@ -52,11 +64,20 @@ workflowKey:
         - STEP_ACTION_AUTHORIZE:
             notificationConfig:
               notificationCode: N-R-11
+                data:
+                  - key: PROPOSAL_NAME
+                    path: 'dataset.formData.assets.proposalName'                
             auditTrail:
-              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL         
+              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+                data:
+                  - key: PROPOSAL_NAME
+                    path: 'dataset.formData.assets.proposalName'                        
     step3: # Mandate step
-      title: 'Step3 Title'    
-      roles:
+      title: 'Step3 Title'
+      rules:
+        enable: 'step1 && step2'  
+        disable: '!step2'            
+      stepEnabledFor:
         - CLIENT
         - LGIM
       title: 'Step4 Title'
@@ -66,5 +87,11 @@ workflowKey:
         - STEP_ACTION_PROCEED_WORKFLOW:
             notificationConfig:
               notificationCode: N-R-20
+                data:
+                  - key: PROPOSAL_NAME
+                    path: 'dataset.formData.assets.proposalName'              
             auditTrail:
-              auditTrailAction: ATA_MANDATE_WORKFLOW         
+              auditTrailAction: ATA_MANDATE_WORKFLOW
+                data:
+                  - key: PROPOSAL_NAME
+                    path: 'dataset.formData.assets.proposalName'                        
