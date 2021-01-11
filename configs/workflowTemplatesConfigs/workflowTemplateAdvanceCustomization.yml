@@ -40,9 +40,9 @@ workflowKey:
             auditTrail:
               auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
                 data:
-                  - key: PROPOSAL_NAME
-                    path: 'dataset.formData.assets.proposalName'              
-      preserve: true
+                  - key: DOC
+                    value: 'IAA Document'              
+      preserve: true # 
         - from: 'tab.valueAbc'
           to: 'valueAbc'                                   
     step2: # Approve Reject step
@@ -94,4 +94,8 @@ workflowKey:
               auditTrailAction: ATA_MANDATE_WORKFLOW
                 data:
                   - key: PROPOSAL_NAME
-                    path: 'dataset.formData.assets.proposalName'                        
+                    path: 'dataset.formData.assets.proposalName'
+requiredValues:
+  - var1.abcd 
+  - var2.abcd 
+  - var3.abcd                                             

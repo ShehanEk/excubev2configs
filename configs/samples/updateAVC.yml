@@ -1,0 +1,51 @@
+version: 1.00
+updateAVC:
+  title: 'Update AVC information'  
+  rules:
+    enable: '!reqCancelIaaFma && !updSip' 
+  steps:
+    avcDetl:
+      title: 'Input AVC information'      
+      rules:      
+        enable: 'TRUE'
+      #template configs        
+    dwnldAvcDetl:
+      title: 'Approve AVC information (LGIM)'      
+      rules:      
+        enable: 'avcDetl'
+      #template configs                 
+    genrDocsAvc:
+      title: 'Generate SIP (LGIM)'      
+      rules:      
+        enable: 'avcDetl && dwnldAvcDetl'
+      #template configs                    
+    aprvSip:
+      title: 'Approve SIP (LGIM)'      
+      rules:       
+        enable: 'uploadSip'
+      #template configs             
+    publDocsAvc:
+      title: 'Publish SIP (LGIM)'      
+      rules: 
+        enable: 'aprvSip'
+      #template configs            
+    schAprvSip:
+      title: 'Review Statement of Investment Principles'      
+      rules:       
+        enable: 'publishedSip'   
+      #template configs         
+    sponsrConsltLtr:
+      title: 'Confirm sponsor consultation'      
+      rules:       
+        enable: 'publDocsAvc && schAprvSip' 
+        disable: '!publDocsAvc && !schAprvSip'   
+      #template configs          
+    actMendt:
+      title: 'Activate mandate (LGIM)'      
+      rules:         
+        enable: 'schAprvSip && sponsrConsltLtr'
+      #template configs        
+requiredValues:
+  - var1.abcd 
+  - var2.abcd 
+  - var3.abcd            

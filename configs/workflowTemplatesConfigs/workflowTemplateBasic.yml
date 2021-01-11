@@ -1,3 +1,11 @@
+# The workflow will be updated depending on a set of rules defined by the developer as per the requirement.
+# These rules are the conditions that define the behavior( a workflow/step being enabled, disbaled or visible) of a workflow. 
+# An attribute in the rule is a condition which interprets a boolean and these attributes can be a state of a step, or some custom attribute(Eg:  whether a document is uploaded/published/approved) . 
+# These attributes will be saved in the database(registry service - which acts as a global registry) and will be visible to all the workflows. 
+# Once a workflow gets updated these attributes will be updated in the registry and will be checked against the logic written in the rules.
+
+
+version: 1.00
 updateAVC:
   title: 'Workflow Title'
   rules:
@@ -41,4 +49,7 @@ updateAVC:
       title: 'Step4 Title'
       claimConfig:
         assigneeClaim: CLM-4
-
+requiredValues:
+  - var1.abcd 
+  - var2.abcd 
+  - var3.abcd 

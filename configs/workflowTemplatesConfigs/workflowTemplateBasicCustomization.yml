@@ -67,4 +67,8 @@ workflowKey:
             notificationConfig:
               notificationCode: N-R-20
             auditTrail:
-              auditTrailAction: ATA_MANDATE_WORKFLOW         
+              auditTrailAction: ATA_MANDATE_WORKFLOW
+requiredValues:
+  - var1.abcd 
+  - var2.abcd 
+  - var3.abcd                        

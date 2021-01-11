@@ -1,0 +1,40 @@
+version: 1.00
+updateSIP:
+  title: 'Review Statement of Investment Principles'  
+  rules:   
+    enable: '!reqCancelIaaFma && !updAvcDetl' 
+  steps:
+    genrSip:
+      title: 'Generate documents (LGIM)'      
+      rules: 
+        enable: 'genrTrnsReprt' 
+      #template configs        
+    aprvSip:
+      title: 'Approve SIP (LGIM)'      
+      rules:       
+        enable: 'uploadSip'  
+      #template configs           
+    publSip:
+      title: 'Publish documents (LGIM)'      
+      rules:       
+        enable: 'aprvSip'  
+      #template configs           
+    schAprvSip:
+      title: 'Review Statement of Investment Principles'      
+      rules:       
+        enable: 'publishedSip' 
+      #template configs            
+    spnsrConsltLtr:
+      title: 'Confirm Sponsor Consultation'      
+      rules:         
+        enable: 'publishedSip'  
+      #template configs           
+    actMendt:
+      title: 'Activate mandate (LGIM)'      
+      rules:         
+        enable: 'schAprvSip && spnsrConsltLtr'
+      #template configs         
+requiredValues:
+  - var1.abcd 
+  - var2.abcd 
+  - var3.abcd         
