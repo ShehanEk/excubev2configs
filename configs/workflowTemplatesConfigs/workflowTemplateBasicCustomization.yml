@@ -27,11 +27,11 @@ workflowKey:
           key: returnTargetValue                   
       stepActions:    
         - STEP_ACTION_UPDATE_WORKFLOW:
-            stepFunction: 'adhocDocGen'
+            stepFunction: 'stepFunctionName'
             notificationConfig:
               notificationCode: N-R-11
             auditTrail:
-              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+              auditTrailAction: ATA_SAVE_FORM_DATA
       preserve: true                             
     step2: # Approve Reject step
       title: 'Step2 Title'
@@ -50,9 +50,9 @@ workflowKey:
       stepActions:  
         - STEP_ACTION_AUTHORIZE:
             notificationConfig:
-              notificationCode: N-R-11
+              notificationCode: N-R-12
             auditTrail:
-              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL         
+              auditTrailAction: ATA_APPROVE_IAA         
     step3: # Mandate step
       title: 'Step3 Title'
       rules:

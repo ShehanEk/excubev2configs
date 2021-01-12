@@ -34,15 +34,15 @@ workflowKey:
         - STEP_ACTION_UPDATE_WORKFLOW:
             stepFunction: 'stepFunctionName'
             notificationConfig:
-              notificationCode: N-R-11
+              notificationCode: N-R-11 # example Parameterized notification template: {DOC_TYPE} uploaded successfully. 
                 data:
-                  - key: PROPOSAL_NAME
-                    path: 'dataset.formData.assets.proposalName'              
+                  - key: DOC_TYPE
+                    path: 'formData.docType' # get value from data saved in step data              
             auditTrail:
-              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+              auditTrailAction: ATA_SAVE_FORM_DATA # Parameterized audit trail
                 data:
-                  - key: DOC
-                    value: 'IAA Document'              
+                  - key: DOC_TYPE   
+                    value: 'IAA Document' # value set in configuration              
       preserve: true # 
         - from: 'tab.valueAbc'
           to: 'valueAbc'                                   
@@ -64,15 +64,19 @@ workflowKey:
       stepActions:  
         - STEP_ACTION_AUTHORIZE:
             notificationConfig:
-              notificationCode: N-R-11
+              notificationCode: N-R-12 # example Parameterized notification template: {DOC_TYPE} of sample workflow {DOC_STATUS}.
                 data:
-                  - key: PROPOSAL_NAME
-                    path: 'dataset.formData.assets.proposalName'                
+                  - key: DOC_TYPE
+                    path: 'formData.docType'                   
+                  - key: DOC_STATUS
+                    path: 'document.iaa.status'               
             auditTrail:
-              auditTrailAction: ATA_REQUEST_INITIAL_PROPOSAL
+              auditTrailAction: ATA_APPROVE_IAA
                 data:
-                  - key: PROPOSAL_NAME
-                    path: 'dataset.formData.assets.proposalName'                        
+                  - key: DOC_TYPE
+                    path: 'formData.docType'                   
+                  - key: DOC_STATUS
+                    path: 'document.iaa.status'                          
     step3: # Mandate step
       title: 'Step3 Title'
       rules:
@@ -87,15 +91,9 @@ workflowKey:
       stepActions:  
         - STEP_ACTION_PROCEED_WORKFLOW:
             notificationConfig:
-              notificationCode: N-R-20
-                data:
-                  - key: PROPOSAL_NAME
-                    path: 'dataset.formData.assets.proposalName'              
+              notificationCode: N-R-20              
             auditTrail:
               auditTrailAction: ATA_MANDATE_WORKFLOW
-                data:
-                  - key: PROPOSAL_NAME
-                    path: 'dataset.formData.assets.proposalName'
 versionUpgradeConfig:        
   requiredValues:
     - var1.abcd 
