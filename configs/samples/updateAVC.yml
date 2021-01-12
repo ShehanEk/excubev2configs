@@ -45,7 +45,3 @@ updateAVC:
       rules:         
         enable: 'schAprvSip && sponsrConsltLtr'
       #template configs        
-requiredValues:
-  - var1.abcd 
-  - var2.abcd 
-  - var3.abcd            

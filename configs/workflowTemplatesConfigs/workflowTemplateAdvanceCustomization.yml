@@ -19,16 +19,17 @@ workflowKey:
       claimConfig:
         assigneeClaim: CLM-1
       initialDataConfig: # Where initial data of the workflow coming from. Can refer scheme data or can refer workflow data 
-        - key: 'assetValue'
+        - key: assetValue
           source: scheme
-          alias: 'assetValueAlias'
+          alias: assetValueAlias
         - key: 'fundValue'
           source: scheme
-          alias: 'fundValueAlias'          
-        - source: workflow
+          alias: fundValueAlias          
+        - key: returnTargetValue
+          source: workflow
           workflow: workflowKey
           stepKey: stepKey
-          alias: 'returnTargetData'                   
+          alias: returnTargetData                   
       stepActions:    
         - STEP_ACTION_UPDATE_WORKFLOW:
             stepFunction: 'stepFunctionName'
@@ -95,7 +96,8 @@ workflowKey:
                 data:
                   - key: PROPOSAL_NAME
                     path: 'dataset.formData.assets.proposalName'
-requiredValues:
-  - var1.abcd 
-  - var2.abcd 
-  - var3.abcd                                             
+versionUpgradeConfig:        
+  requiredValues:
+    - var1.abcd 
+    - var2.abcd 
+    - var3.abcd                                           

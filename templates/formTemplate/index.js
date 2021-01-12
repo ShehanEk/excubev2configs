@@ -3,7 +3,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { reduxForm, getFormValues } from "redux-form";
-import FormBaseTemplate from "../../../../../../components/formTemplates/BaseTemplate";
+import FormBaseTemplate from "../components/FormBaseTemplate";
 
 import formSectionJSON from "./form";
 

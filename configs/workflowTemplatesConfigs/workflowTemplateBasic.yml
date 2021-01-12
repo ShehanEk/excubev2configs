@@ -24,7 +24,7 @@ updateAVC:
         - LGIM
       claimConfig:
         assigneeClaim: CLM-1       
-      preserve: true           
+      preserve: true  # save step data when workflow get mandated         
     step2: # Approve Reject step
       title: 'Step2 Title'
       rules:
@@ -49,7 +49,9 @@ updateAVC:
       title: 'Step4 Title'
       claimConfig:
         assigneeClaim: CLM-4
-requiredValues:
-  - var1.abcd 
-  - var2.abcd 
-  - var3.abcd 
+
+versionUpgradeConfig:        
+  requiredValues:
+    - var1.abcd 
+    - var2.abcd 
+    - var3.abcd 

@@ -2,7 +2,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { reduxForm, getFormValues } from "redux-form";
-import ApproveRejectTemplate from "../../../../../../components/formTemplates/BaseTemplate";
+import ApproveRejectTemplate from "../components/ApproveRejectTemplate";
 
 import formSectionJSON from "./form";
 

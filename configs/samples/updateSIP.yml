@@ -34,7 +34,3 @@ updateSIP:
       rules:         
         enable: 'schAprvSip && spnsrConsltLtr'
       #template configs         
-requiredValues:
-  - var1.abcd 
-  - var2.abcd 
-  - var3.abcd         

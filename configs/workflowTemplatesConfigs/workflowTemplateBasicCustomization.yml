@@ -21,8 +21,10 @@ workflowKey:
       initialDataConfig: # Where initial data of the workflow coming from. Can refer scheme data or can refer workflow data 
         - key: 'assetValue'
           source: scheme
-        - key: 'fundValue'
-          source: scheme                    
+        - source: workflow
+          workflow: workflowKey
+          stepKey: stepKey
+          key: returnTargetValue                   
       stepActions:    
         - STEP_ACTION_UPDATE_WORKFLOW:
             stepFunction: 'adhocDocGen'
@@ -68,7 +70,8 @@ workflowKey:
               notificationCode: N-R-20
             auditTrail:
               auditTrailAction: ATA_MANDATE_WORKFLOW
-requiredValues:
-  - var1.abcd 
-  - var2.abcd 
-  - var3.abcd                        
+versionUpgradeConfig:        
+  requiredValues:
+    - var1.abcd 
+    - var2.abcd 
+    - var3.abcd                       
