@@ -36,12 +36,12 @@ workflowKey:
             notificationConfig:
               notificationCode: N-R-11 # example Parameterized notification template: {DOC_TYPE} uploaded successfully. 
                 data:
-                  - key: DOC_TYPE
+                  - placeholder: DOC_TYPE
                     path: 'formData.docType' # get value from data saved in step data              
             auditTrail:
               auditTrailAction: ATA_SAVE_FORM_DATA # Parameterized audit trail
                 data:
-                  - key: DOC_TYPE   
+                  - placeholder: DOC_TYPE   
                     value: 'IAA Document' # value set in configuration              
       preserve: true # 
         - from: 'tab.valueAbc'
@@ -66,16 +66,16 @@ workflowKey:
             notificationConfig:
               notificationCode: N-R-12 # example Parameterized notification template: {DOC_TYPE} of sample workflow {DOC_STATUS}.
                 data:
-                  - key: DOC_TYPE
+                  - placeholder: DOC_TYPE
                     path: 'formData.docType'                   
-                  - key: DOC_STATUS
-                    path: 'document.iaa.status'               
+                  - placeholder: DOC_STATUS
+                    value: 'Published'               
             auditTrail:
               auditTrailAction: ATA_APPROVE_IAA
                 data:
-                  - key: DOC_TYPE
+                  - placeholder: DOC_TYPE
                     path: 'formData.docType'                   
-                  - key: DOC_STATUS
+                  - placeholder: DOC_STATUS
                     path: 'document.iaa.status'                          
     step3: # Mandate step
       title: 'Step3 Title'
